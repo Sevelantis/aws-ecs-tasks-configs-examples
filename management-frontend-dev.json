@@ -1,0 +1,51 @@
+{
+    "family": "management-frontend-dev",
+    "containerDefinitions": [
+        {
+            "image": "358682810880.dkr.ecr.eu-west-3.amazonaws.com/management-frontend-dev",
+            "name": "management-frontend-dev",
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/management-frontend",
+                    "awslogs-region": "eu-west-3",
+                    "awslogs-stream-prefix": "management-frontend"
+                }
+            },
+            "cpu": 900,
+            "memory": 900,
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": 80,
+                    "hostPort": 80
+                }
+            ],
+            "secrets": [
+             {
+                "valueFrom": "arn:aws:secretsmanager:eu-west-3:358682810880:secret:Dev-Credentials-KKgoLq:AWS_ACCESS_KEY_ID::",
+                "name": "AWS_ACCESS_KEY_ID"
+             },
+             {
+                "valueFrom": "arn:aws:secretsmanager:eu-west-3:358682810880:secret:Dev-Credentials-KKgoLq:AWS_SECRET_ACCESS_KEY::",
+                "name": "AWS_SECRET_ACCESS_KEY"
+             }
+            ]
+        }
+    ],
+    "networkMode": "awsvpc",
+    "taskRoleArn": "arn:aws:iam::358682810880:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::358682810880:role/ecsTaskExecutionRole",
+    "cpu": "900",
+    "memory": "900",
+    "tags": [
+        {
+            "key": "ecs:taskDefinition:createdFrom",
+            "value": "ecs-console-v2"
+        },
+        {
+            "key": "ENVIRONMENT",
+            "value": "dev"
+        }
+    ]
+}

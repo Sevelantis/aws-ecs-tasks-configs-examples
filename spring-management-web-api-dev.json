@@ -1,0 +1,77 @@
+{
+    "family": "spring-management-web-api-dev",
+    "containerDefinitions": [
+        {
+            "image": "358682810880.dkr.ecr.eu-west-3.amazonaws.com/spring-management-web-api-dev:latest",
+            "name": "spring-management-web-api-dev",
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/management-web-api",
+                    "awslogs-region": "eu-west-3",
+                    "awslogs-stream-prefix": "spring-management-api"
+                }
+            },
+            "cpu": 900,
+            "memory": 900,
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": 8080,
+                    "hostPort": 8080
+                }
+            ],
+            "environment": [
+                {
+                    "name": "MYSQL_HOST",
+                    "value": "db.cvb7l6mp7lvr.eu-west-3.rds.amazonaws.com"
+                },
+                {
+                    "name": "MYSQL_PORT",
+                    "value": "3306"
+                },
+                {
+                    "name": "MYSQL_DB_NAME",
+                    "value": "management"
+                }
+            ],
+            "secrets": [
+                 {
+                    "name": "AWS_ACCESS_KEY_ID",
+                    "valueFrom": "arn:aws:secretsmanager:eu-west-3:358682810880:secret:video-proxy-conf-QXJZkv:AWS_ACCESS_KEY_ID::"
+                 },
+                 {
+                    "name": "AWS_SECRET_ACCESS_KEY",
+                    "valueFrom": "arn:aws:secretsmanager:eu-west-3:358682810880:secret:video-proxy-conf-QXJZkv:AWS_SECRET_ACCESS_KEY::"
+                 },
+                 {
+                    "name": "AWS_DEFAULT_REGION",
+                    "valueFrom": "arn:aws:secretsmanager:eu-west-3:358682810880:secret:video-proxy-conf-QXJZkv:AWS_DEFAULT_REGION::"
+                 },
+                 {
+                     "name": "MYSQL_USER",
+                     "valueFrom": "arn:aws:secretsmanager:eu-west-3:358682810880:secret:video-proxy-conf-QXJZkv:MYSQL_USER::"
+                 },
+                 {
+                     "name": "MYSQL_PASSWORD",
+                     "valueFrom": "arn:aws:secretsmanager:eu-west-3:358682810880:secret:video-proxy-conf-QXJZkv:MYSQL_PASSWORD::"
+                 }
+            ]
+        }
+    ],
+    "networkMode": "awsvpc",
+    "taskRoleArn": "arn:aws:iam::358682810880:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::358682810880:role/ecsTaskExecutionRole",
+    "cpu": "900",
+    "memory": "900",
+    "tags": [
+        {
+            "key": "ecs:taskDefinition:createdFrom",
+            "value": "ecs-console-v2"
+        },
+        {
+            "key": "ENVIRONMENT",
+            "value": "dev"
+        }
+    ]
+}

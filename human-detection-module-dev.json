@@ -1,0 +1,114 @@
+{
+    "family": "human-detection-module-dev",
+    "containerDefinitions": [
+        {
+            "name": "human-detection-module-dev",
+            "image": "358682810880.dkr.ecr.eu-west-3.amazonaws.com/human-detection-module-dev:latest",
+            "cpu": 900,
+            "memory": 900,
+            "links": [],
+            "portMappings": [],
+            "essential": true,
+            "entryPoint": [],
+            "command": [],
+            "environment": [
+                {
+                    "name": "REDIS_HOST",
+                    "value": "global-cache.y3quej.ng.0001.euw3.cache.amazonaws.com"
+                },
+                {
+                    "name": "RABBIT_MQ_HOST",
+                    "value": "b-fe75761b-1ee6-4ee3-a5eb-5a3c76d269a1.mq.eu-west-3.amazonaws.com"
+                },
+                {
+                    "name": "RABBIT_MQ_SSL",
+                    "value": "true"
+                },
+                {
+                    "name": "REDIS_PORT",
+                    "value": "6379"
+                },
+                {
+                    "name": "RABBIT_MQ_PORT",
+                    "value": "5671"
+                },
+                {
+                    "name": "RABBIT_MQ_FRAMES_EXCHANGE_NAME",
+                    "value": "human-detection-exchange"
+                },
+                {
+                    "name": "RABBIT_MQ_FRAMES_QUEUE_NAME",
+                    "value": "human-detection-queue"
+                },
+                {
+                    "name": "RABBIT_MQ_ALERT_EXCHANGE_NAME",
+                    "value": "intrusion-alerts-exchange"
+                },
+                {
+                    "name": "RABBIT_MQ_ALERT_QUEUE_NAME",
+                    "value": "intrusion-alerts-queue"
+                },
+                {
+                    "name": "ALERT_EMAIL_FROM",
+                    "value": "pedro.dld@ua.pt"
+                },
+                {
+                    "name": "ALERT_EMAIL_TO",
+                    "value": "pedro.dld@ua.pt"
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "secrets": [
+                {
+                    "name": "AWS_ACCESS_KEY_ID",
+                    "valueFrom": "arn:aws:secretsmanager:eu-west-3:358682810880:secret:HDM-env-t8gvjq:HDM_AWS_ACCESS_KEY_ID::"
+                },
+                {
+                    "name": "AWS_SECRET_ACCESS_KEY",
+                    "valueFrom": "arn:aws:secretsmanager:eu-west-3:358682810880:secret:HDM-env-t8gvjq:HDM_AWS_SECRET_ACCESS_KEY::"
+                },
+                {
+                    "name": "RABBIT_MQ_PASSWORD",
+                    "valueFrom": "arn:aws:secretsmanager:eu-west-3:358682810880:secret:HDM-env-t8gvjq:HDM_RABBIT_MQ_PASSWORD::"
+                },
+                {
+                    "name": "RABBIT_MQ_USERNAME",
+                    "valueFrom": "arn:aws:secretsmanager:eu-west-3:358682810880:secret:HDM-env-t8gvjq:HDM_RABBIT_MQ_USERNAME::"
+                }
+            ],
+            "dnsServers": [],
+            "dnsSearchDomains": [],
+            "extraHosts": [],
+            "dockerSecurityOptions": [],
+            "dockerLabels": {},
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/human-detection-module-dev",
+                    "awslogs-region": "eu-west-3",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "systemControls": []
+        }
+    ],
+    "taskRoleArn": "arn:aws:iam::358682810880:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::358682810880:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "cpu": "900",
+    "memory": "900",
+    "tags": [
+        {
+            "key": "ecs:taskDefinition:createdFrom",
+            "value": "ecs-console-v2"
+        },
+        {
+            "key": "ENVIRONMENT",
+            "value": "dev"
+        }
+    ]
+}

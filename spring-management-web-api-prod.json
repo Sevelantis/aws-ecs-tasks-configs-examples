@@ -1,0 +1,27 @@
+{
+    "family": "spring-management-web-api-dev",
+    "containerDefinitions": [
+        {
+            "image": "358682810880.dkr.ecr.eu-west-3.amazonaws.com/spring-management-web-api-prod:latest",
+            "name": "spring-management-web-api-prod",
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/management-web-api",
+                    "awslogs-region": "eu-west-3",
+                    "awslogs-stream-prefix": "spring-management-api-prod"
+                }
+            },
+            "cpu": 1024,
+            "memory": 512,
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": 8080,
+                    "hostPort": 8080
+                }
+            ]
+        }
+    ],
+    "networkMode": "awsvpc"
+}
